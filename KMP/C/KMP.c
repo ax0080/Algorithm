@@ -29,7 +29,12 @@ int *index_map(char *pattern)
         index[i] = match;
         i++;
     }
-
+    /*
+    for(int i=0; i<pattern_length; i++)
+    {
+        printf("%d ", *(index+i));
+    }
+    */
     return index;
 }
 
@@ -38,7 +43,7 @@ void KMP(char *text, char *pattern)
 {
     int text_length = strlen(text);
     int pattern_length = strlen(pattern);
-
+    int compare_num = 0;
 
 
     //==================== solution 1 : O(n) = n^2 ======================
@@ -48,8 +53,8 @@ void KMP(char *text, char *pattern)
         int j = 0;
         for(j=0; j<pattern_length; j++)
         {
+            compare_num++;
             if(i+j >= text_length) return;
-
             if(pattern[j] == text[i+j]) continue;
             else break; 
         }
@@ -58,20 +63,47 @@ void KMP(char *text, char *pattern)
             printf("find pattern %s in test %d position\n", pattern, i);
         }
     }
+    printf("comparison iteration = %d\n", compare_num);
     */
     
     //==================== solution 2 : KMP search ======================
+    ///*
     int *index = (int *) malloc(sizeof(int) * pattern_length); 
     index = index_map(pattern);
     
-    for(int i=0; i<pattern_length; i++)
-    {
-        printf("%d ", *(index+i));
+    int i = 0;
+    int j = 0;
+    while(i < text_length){
+        while(j < pattern_length){
+            compare_num++;
+            if(pattern[j] == text[i]){
+                if(j == pattern_length - 1){
+                    printf("find pattern %s in test %d position\n", pattern, i - pattern_length + 1);
+                    i = i + 1;
+                    j = 0;
+                    break;
+                }
+                else{
+                    i++;
+                    j++;
+                }
+            }
+            else{
+                if(j == 0){
+                    i++;
+                }
+                else{
+                    j = index[j];
+                }
+            }            
+        }
     }
 
+    printf("comparison iteration = %d\n", compare_num);
 
     free(index);
     return;
+    //*/
 }
 
 int main(){
