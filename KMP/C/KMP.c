@@ -40,6 +40,7 @@ void KMP(char *text, char *pattern)
     int pattern_length = strlen(pattern);
 
 
+
     //==================== solution 1 : O(n) = n^2 ======================
     /*
     for(int i=0; i<text_length; i++)
