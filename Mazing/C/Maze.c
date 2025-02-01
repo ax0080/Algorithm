@@ -17,21 +17,15 @@ bool **read_maze(const char *file_path, int *rows, int *cols) {
 
   char buffer[1024];
   while (fgets(buffer, sizeof(buffer), file)) {
-    // 移除行末的換行符與多餘空格
-    char *line = strtok(buffer, "\r\n");
-    if (line == NULL || strlen(line) == 0) {
-      continue; // 跳過空白行
-    }
-
     int current_cols = 0;
     bool *row_data = NULL;
 
     // 解析一行數據
-    char *token = strtok(line, " ");
+    char *token = strtok(buffer, " ");
     while (token != NULL) {
+      row_data = realloc(row_data, (current_cols + 1) * sizeof(bool));
+      row_data[current_cols] = (atoi(token) != 0); // 0 為 false，其他為 true
       current_cols++;
-      row_data = realloc(row_data, current_cols * sizeof(bool));
-      row_data[current_cols - 1] = (atoi(token) != 0); // 0 為 false，其他為 true
       token = strtok(NULL, " ");
     }
 
