@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h> 
-
 // read maze
 bool **read_maze(const char *file_path, int *rows, int *cols) {
   FILE *file = fopen(file_path, "r");
