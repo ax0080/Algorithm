@@ -10,6 +10,22 @@ typedef struct {
     int x;
     int y;
     int data;
-} node; 
+} Node; 
+
+typedef struct {
+    Node *node;
+    int top;
+    
+
+} NodeStack;
+
+typedef struct {
+    NodeStack nodestack;
+
+    void (*init)(NodeStack* ,int );
+    bool (*isEmpty)(NodeStack*)
+
+
+} NodeWrapper;
 
 #endif
