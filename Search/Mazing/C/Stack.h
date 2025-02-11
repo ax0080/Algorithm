@@ -15,7 +15,6 @@ typedef struct {
 typedef struct {
     Node *node;
     int top;
-    
 
 } NodeStack;
 
