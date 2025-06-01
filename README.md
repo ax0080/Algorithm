@@ -1,1 +1,1 @@
-Some useful algorithm
+Some Useful Algorithm
